@@ -5,23 +5,19 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 require_once __DIR__ . '/bootstrap.php';
 
+echo "Démarrage du peuplement (seeding) de la base de données...\n";
+
 Capsule::table('reservations')->truncate();
 Capsule::statement('SET FOREIGN_KEY_CHECKS=0;');
 Capsule::table('salles')->truncate();
 Capsule::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-$idCours = Capsule::table('types_salle')->where('nom', 'cours')->value('id');
-$idInfo = Capsule::table('types_salle')->where('nom', 'informatique')->value('id');
-$idLabo = Capsule::table('types_salle')->where('nom', 'laboratoire')->value('id');
-$idAmphi = Capsule::table('types_salle')->where('nom', 'amphitheatre')->value('id');
-$idReunion = Capsule::table('types_salle')->where('nom', 'reunion')->value('id');
 
 $salles = [
     [
         'nom' => 'Amphi Turing',
         'batiment' => 'Bâtiment A',
         'capacite' => 150,
-        'type_id' => $idAmphi, 
+        'type' => 'amphitheatre',
         'active' => true,
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
@@ -30,7 +26,7 @@ $salles = [
         'nom' => 'Salle Ada Lovelace',
         'batiment' => 'Bâtiment B',
         'capacite' => 25,
-        'type_id' => $idInfo,
+        'type' => 'informatique',
         'active' => true,
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
@@ -39,7 +35,7 @@ $salles = [
         'nom' => 'Labo Marie Curie',
         'batiment' => 'Bâtiment C',
         'capacite' => 15,
-        'type_id' => $idLabo,
+        'type' => 'laboratoire',
         'active' => true,
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
@@ -48,7 +44,7 @@ $salles = [
         'nom' => 'Salle de Réunion Élysée',
         'batiment' => 'Bâtiment Administratif',
         'capacite' => 10,
-        'type_id' => $idReunion,
+        'type' => 'reunion',
         'active' => true,
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
@@ -57,7 +53,7 @@ $salles = [
         'nom' => 'Salle 101',
         'batiment' => 'Bâtiment A',
         'capacite' => 35,
-        'type_id' => $idCours,
+        'type' => 'cours',
         'active' => false, 
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
@@ -66,4 +62,4 @@ $salles = [
 
 Capsule::table('salles')->insert($salles);
 
-echo " Données de test insérées avec succès \n";
+echo " Données de test insérées avec succès (5 salles prêtes à l'emploi) !\n";
