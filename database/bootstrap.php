@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -11,4 +12,3 @@ $dotenv->safeLoad();
 require_once dirname(__DIR__) . '/config/database.php';
 
 $container = require_once dirname(__DIR__) . '/config/container.php';
-
